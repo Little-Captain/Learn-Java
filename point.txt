@@ -241,3 +241,127 @@
      2. 类与接口: 实现关系. 可以单实现, 也可以多实现
                  还可以在继承一个类的同时实现多个接口 class A extends B implements C, D {}
      3. 接口与接口: 继承关系. 可以单继承, 也可以多继承 interface A extends B, C {}
+     
+049. 独立的 Java 文件
+     一般一个类写在一个独立的 Java 文件中
+     
+050. package 包的作用
+     1. 包其实就是文件夹
+     2. 作用1: 将字节码(.class)进行分类存放
+     3. 作用2: 可以使在同一个项目中有相同的类
+     4. 作用3: 有利于以后功能模块的划分
+     
+051. 定义包的格式
+     1. 包名: 公司域名的倒写
+     2. 如: com.baidu.功能模块名. 用(.)分隔, 有几个字符串, 就会创建几个文件夹
+     
+052. 定义包的注意事项
+     1. 在包下面创建 Java 文件, 第一行应加入 package 代码, 表名这个类属于哪个包
+     2. 如果一个包中的类使用另一个包中的类, 需要使用 import 导入另一个包的类
+     3. package 语句必须放在第一行
+     4. 一个 Java 文件中只能有一个 package 语句
+     
+053. import 关键字
+     1. 作用: 导入类. 不导入, 不能跨包直接访问另一个包中的类
+     2. 使用方式
+        a. import com.baidu.model.Student 只导入一个类
+        b. import com.baidu.model.* 导入包中的所有类, 不建议这样用
+     3. 不导入. 可以通过类的完整名称使用类
+        (一般不这样用, 不过可以解决不同包同类名的使用问题)
+        com.baidu.model.Student stu = new com.baidu.model.Student();
+     4. 包中的类能被其他包访问, 一定是 public 的类.
+        public 修饰的类代表其他包可以访问此类
+        如果类不是 public, 代表只能在当前包被访问
+        
+054. package, import, class 在 Java 文件中的顺序
+     1. package 只能有一个, 必须放在 Java 文件的第一行
+     2. import 只能放在 package 的下面, 多个 import 应放在一起
+     3. class 放在 package 和 import 的下面
+     4. package -> import -> class
+     
+055. 四种权限修饰符
+     private < default < protected < public
+     同一个类
+     x         同一个包中的类
+     x         x         不同包中的子类
+     x         x         x           不同包中的非子类
+     一般使用
+     1. 主要使用 private, public
+     2. 写方法, 一般加上 private 或者 public
+     3. 写类的时候, 在类名前加 public
+     
+056. 常见的修饰符
+     1. 权限修饰符: private, default, protected, public
+     2. 状态修饰符: static, final
+     3. 抽象修饰符: abstract
+     
+057. 用在类上的修饰符
+     1. 权限修饰符: default, public
+     2. 状态修饰符: final
+     3. 抽象修饰符: abstract
+     说明:
+     1. 如果一个类不写任何修饰符(default), 代表只能在当前包访问这个类
+     2. 如果一个类声明为 public, 代表任何人都能访问这个类
+     3. 如果一个类声明为 final, 代表这个类不能被继承
+     4. 如果一个类声明为 abstract, 代表这个类是抽象类, 不能实例化对象
+     
+058. 用在成员变量上的修饰符
+     1. 权限修饰符: private, default, protected, public
+     2. 状态修饰符: static, final
+     说明:
+     1. 如果一个属性声明为 private, 代表这个属性只能在当前类中使用
+     2. 如果一个属性什么都不声明(default), 在同一个包中能被访问, 其他包不能
+     3. 如果一个属性声明为 public, 代表任何地方都能访问这个属性
+     4. 如果一个属性声明为 static, 代表静态属性, 通过类名访问
+     5. 属性声明为 final, 代表这是个常量
+     6. protected
+     
+059. 用在构造方法上的修饰符
+     1. 权限修饰符: private, default, protected, public
+     说明:
+     1. 使用 public, 代表外面(能使用类的地方)可以使用这个构造方法
+     2. 使用 private, 代表外面不能使用这个构造方法
+     3. 使用 protected, 代表???
+     4. 使用 default(不写), 代表同一个包中能使用这个构造方法
+     
+060. 用在成员方法上的修饰符
+     1. 权限修饰符: private, default, protected, public
+     2. 状态修饰符: static, final
+     3. 抽象修饰符: abstract
+     说明:
+     1. 使用 private, 代表只能在当前类中调用
+     2. 使用 default(不写), 代表同一个包中能调用方法
+     3. 使用 public, 代表任何地方都能访问这个方法
+     4. 使用 protected, 代表
+     5. 使用 static, 代表静态方法, 通过类名调用
+     6. 使用 final, 代表这个方法不能被重写(override)
+     7. 使用 abstract, 代表这个方法需要被子类实现
+     
+061. 修饰符的联用举例
+     成员方法:
+     1. public static: 静态, 任何地方都能访问
+     2. public abstract: 抽象, 子类实现, 任何地方都能访问
+     3. public final: 不能被重写, 任何地方都能访问
+     成员变量:
+     1. public static final: 静态, 常量, 任何地方都能访问
+     
+062. protected 修饰符
+     1. protected修饰的方法只能在当前包中访问, 或者子类中访问
+     2. 不用包, 不能访问类的 protected 的方法
+     3. 不用包, 通过在子类中去调用父类的 protected 方法
+     
+063. 抽象类和接口的区别
+     1. 抽象类
+        成员变量: 可以常量, 也可以变量
+        构造方法: 有
+        成员方法: 可以抽象, 也可以非抽象
+     2. 接口:
+        成员变量: 只可以常量(静态)
+        成员方法: 只可以抽象
+     3. 关系区别:
+        类与类: 继承关系, 单继承
+        类与接口: 实现关系, 单实现或多实现
+        接口与接口: 继承关系, 单继承或多继承
+     4. 设计理念区别:
+        抽象类: 定义该继承体系中的共性功能
+        接口: 定义该继承体系的扩展功能
